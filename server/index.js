@@ -22,6 +22,10 @@ import postRoutes from './routes/posts.js';
 
 app.use('/post', postRoutes);
 
+app.get('/', (req, res) => {
+  res.send("Hello there! this is the back-end for 'Memories API', go and check the front-end, no reason to stick here")
+})
+
 //DB connection (ATLAS connection)
 mongoose.connect(process.env.CONNECTION_URL)
   .then(() => app.listen(process.env.PORT, () => console.log(`Server running on port: ${process.env.PORT}`)))
