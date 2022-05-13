@@ -1,4 +1,4 @@
-import CONST from '../Constants'
+import { POST as CONST } from '../Constants'
 
 //Here the state will be the posts keeped inside the DB, but I'm not renaming the state var to posts as done in the video for keeping the nomencalture
 const reducer = (state = [], action) => {

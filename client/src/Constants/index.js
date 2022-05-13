@@ -1,6 +1,4 @@
-//This file will only contain the names of the actions types. That's why there is no more nesting indise of CONST
-
-const CONST = {
+export const POST = {
   fetchAll: 'FETCH_ALL',
   create: 'CREATE',
   update: 'UPDATE',
@@ -8,4 +6,7 @@ const CONST = {
   like: 'LIKE'
 }
 
-export default CONST;
+export const AUTH = {
+  auth: 'AUTH',
+  logout: 'LOGOUT'
+}

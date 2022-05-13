@@ -5,7 +5,7 @@ const theme = createTheme({})
 export const style = {
   root: {
     '& .MuiTextField-root': {
-      margin: theme.spacing(1),
+      marginY: theme.spacing(1),
     },
   },
   paper: {
@@ -18,7 +18,7 @@ export const style = {
   },
   fileInput: {
     width: '97%',
-    margin: '10px 0',
+    margin: '10px 0 10px',
   },
   buttonSubmit: {
     marginBottom: "10px",

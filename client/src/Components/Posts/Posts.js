@@ -1,10 +1,14 @@
+//External imports
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+//UI
 import { Grid, CircularProgress } from '@mui/material'
 
+//Internal imports
 import Post from './Post/Post'
 
+//Styles
 import { style } from './styles'
 
 const Posts = ({ setCurrentId }) => {

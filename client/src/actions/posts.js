@@ -1,6 +1,6 @@
 import * as api from '../api';
 
-import CONST from '../Constants'
+import { POST as CONST } from '../Constants'
 
 // Actions Creators
 
