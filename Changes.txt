@@ -1,0 +1,9 @@
+Changes over the original code:
+
+-styles files were changed to use the MUI V5 features (mainly based on sx and using @emotions over JS object structures)
+
+-Google Login was changed to use the new Identity services over the old OAuth service. I didn't use a package, I based the code on the official documentation and wrote it over it.
+
+-Inside the store I have the auth->authData which is always refering to the user localy saved (the reducer saves and deletes the localStorage, while updating the entry). Instead of following the video and doing multiple calls to read the storage, I should just read the state.
+
+-Aesthetic changes (background, some colors, icon?)

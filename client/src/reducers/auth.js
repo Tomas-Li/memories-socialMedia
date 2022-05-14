@@ -1,7 +1,7 @@
 import { AUTH as CONST } from '../Constants'
 
 //Here the state will be the posts keeped inside the DB, but I'm not renaming the state var to posts as done in the video for keeping the nomencalture
-const reducer = (state = { authData: null }, action) => {
+const reducer = (state = { authData: JSON.parse(localStorage.getItem('profile')) }, action) => {
   switch (action.type) {
     case CONST.auth:
       localStorage.setItem('profile', JSON.stringify({ ...action?.data })) //this is result and token

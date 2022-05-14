@@ -65,7 +65,7 @@ const GoogleAuth = () => {
 
     try {
       //todo{cambiar por una action o al menos usar CONST.AUTH}
-      dispatch({ type: 'AUTH', data: { result }});
+      dispatch({ type: 'AUTH', data: { result, token: token.credential }});
 
       navigate('/');
     } catch (error) {

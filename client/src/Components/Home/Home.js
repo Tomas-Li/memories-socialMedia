@@ -16,12 +16,14 @@ import Form from '../Form/Form';
 import { style } from './styles'
 
 const Home = () => {
+  //todo{describe what is id doing here}
   const [currentId, setCurrentId] = useState(null)
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPosts());
   }, [currentId, dispatch]);
+
 
   return (
     <>

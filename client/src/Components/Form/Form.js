@@ -13,7 +13,7 @@ import { style } from './styles';
 
 const Form = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem('profile'));
+  const user = useSelector((state) => state.auth.authData)
 
   const [postData, setPostData] = useState({
     title: '',
@@ -23,9 +23,6 @@ const Form = ({ currentId, setCurrentId }) => {
   });
   
   const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
-
-  //Test-level
-  // console.log('Form level')
 
   useEffect(() => {
     if(post) setPostData(post);

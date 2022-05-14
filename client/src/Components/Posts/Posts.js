@@ -14,9 +14,6 @@ import { style } from './styles'
 const Posts = ({ setCurrentId }) => {
   const posts = useSelector((state) => state.posts);
 
-  //Test-level
-  // console.log('Posts level')
-
   return (
     !posts.length ? <CircularProgress /> :(
       <Grid sx={style.mainContainer} container alignItems="stretch" spacing={3}>

@@ -1,5 +1,5 @@
 //External imports
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 
 //Actions
@@ -18,7 +18,7 @@ import { style } from './styles'
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem('profile'));
+  const user = useSelector((state) => state.auth.authData)
 
   return (
     <Card sx={style.card}>

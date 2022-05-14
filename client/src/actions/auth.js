@@ -27,3 +27,7 @@ export const signup = (formData, navigate) => async (dispatch) => {
     console.error(error)
   }
 }
+
+export const logout = () => async (dispatch) => {
+  dispatch({ type: CONST.logout });
+}
