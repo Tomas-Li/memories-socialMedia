@@ -16,7 +16,7 @@ export const style = {
     }
   },
   heading: {
-    color: "rgba(0,183,255, 1)"
+    color: deepPurple[500]
   },
   image: {
     marginLeft: 15,
@@ -42,6 +42,10 @@ export const style = {
   purple: {
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],
+    '&:hover':{
+      color: theme.palette.getContrastText(deepPurple[200]),
+      backgroundColor: deepPurple[300],
+    }
   },
 }; 
 
