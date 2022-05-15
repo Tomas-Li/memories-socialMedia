@@ -49,8 +49,12 @@ const GoogleAuth = () => {
       .catch(console.error)
 
     return () => {
-      const scriptTag = document.querySelector(`script[src="${src}"]`)
-      if (scriptTag) document.body.removeChild(scriptTag)
+      const scriptTag = document.querySelector(`script[src="${src}"]`);
+      if (scriptTag) document.body.removeChild(scriptTag);
+      
+      //The following link is added by google when loading the button
+      const googleLinkExternal = document.querySelector("link[id='googleidentityservice']");
+      if (googleLinkExternal) document.head.removeChild(googleLinkExternal);
     }
     // eslint-disable-next-line
   }, [])
