@@ -1,8 +1,11 @@
 //External imports
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPost, updatePost } from '../../actions/posts';
 import FileBase from 'react-file-base64';
+
+//Actions
+import { createPost, updatePost } from '../../actions/posts';
+import { createTags, fetchTags } from '../../api';
 
 //UI
 import { TextField, Button, Typography, Paper, Box } from '@mui/material';
@@ -13,7 +16,10 @@ import { style } from './styles';
 
 const Form = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.authData)
+  const user = useSelector((state) => state.auth.authData);
+  const tags = useSelector((state) => state.tags);
+
+  console.log(tags)
 
   const [postData, setPostData] = useState({
     title: '',

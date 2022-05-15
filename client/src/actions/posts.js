@@ -9,8 +9,8 @@ import { POST as CONST } from '../Constants'
   //instead of returning the acton, we dispatch the action.
 export const getPosts = () => async (dispatch) => {
   try {
-    const { data } = await api.fetchPost(); //returns all the memories
-    dispatch({ type: CONST.fetchAll, payload: data });
+    const { data: posts } = await api.fetchPost(); //returns all the posts
+    dispatch({ type: CONST.fetchAll, payload: posts });
   } catch (error) {
     console.log(error);
   }

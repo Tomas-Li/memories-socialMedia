@@ -14,19 +14,23 @@ API.interceptors.request.use((req) => {
   return req; //we have to re send it to the other requests
 });
 
+// posts
 export const fetchPost = () => API.get('/post');
-
 //This call will create a post, so it has to receive it, then call the backend with it.
 export const createPost = (newPost) => API.post('/post', newPost);
-
 export const updatePost = (id, updatedPost) => API.patch(`/post/${id}`, updatedPost)
-
 export const deletePost = (id) => API.delete(`/post/${id}`);
-
 export const likePost = (id) => API.patch(`/post/${id}/likePost`);
 
 
-//auth
+// tags
+export const fetchTags = () => API.get('/tags');
+export const createTags = (newPost) => API.post('/tags', newPost);
+
+
+// auth
 //We are sending the formData as req.body because of the post method from axios!
 export const signIn = (formData) => API.post('/user/signin', formData); 
 export const signUp = (formData) => API.post('/user/signup', formData);
+
+

@@ -19,9 +19,11 @@ app.use(cors());
 //Routing
 //Is being done before the DB connection as this one will be doing the listening if the connection is succesfull
 import postRoutes from './routes/posts.js';
+import tagsRoutes from './routes/tags.js';
 import userRoutes from './routes/user.js';
 
 app.use('/post', postRoutes);
+app.use('/tags', tagsRoutes);
 app.use('/user', userRoutes);
 
 app.get('/', (req, res) => {

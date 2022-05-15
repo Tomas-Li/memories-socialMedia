@@ -10,7 +10,7 @@ import thunk from 'redux-thunk';
 import reducers from './reducers'
 
 //Internal imports
-import App from './App.js'
+import App from './App.jsx'
 
 //styles
 import './index.css';
