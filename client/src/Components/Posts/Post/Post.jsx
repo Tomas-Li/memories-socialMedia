@@ -21,7 +21,7 @@ const Post = ({ post, setCurrentId }) => {
   const user = useSelector((state) => state.auth.authData)
 
   return (
-    <Card sx={style.card}>
+    <Card sx={style.card} raised elevation={6}>
       <CardMedia sx={style.media} image={post.selectedFile} title={post.title}/>
       <Box sx={style.overlay}>
         <Typography variant="h6">{post.name}</Typography>

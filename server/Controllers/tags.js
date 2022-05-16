@@ -4,8 +4,6 @@ export const getTags = async (req, res) => {
   try {
     const tags = await Tags.find();
 
-    console.log("TAGS FORM BACKEND", tags);
-
     res.status(200).json(tags)
   } catch (error) {
     res.status(404).json({ message: error.message })
@@ -18,14 +16,15 @@ export const createTags = async (req, res) => {
   const newTags = []
   
   try {
-    tags.map(tag => {
-      if( !Tags.find({ "name": tag }) ){
-        let newTag = new Tags({ "name": tag });
+    for(let i=0; i<tags.length; i++){
+      let foundIt = await Tags.findOne({ name: tags[i] })
+      if (!foundIt) {
+        const newTag = new Tags({ name: tags[i] });
         newTags.push(newTag);
         newTag.save();
       }
-    })
-    res.status(201).json(newTags)
+    }
+  res.status(201).json(newTags)
   } catch (error) {
     console.log({ message: error.message });
   }

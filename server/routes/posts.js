@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getPosts, createPost, updatePost, deletePost, likePost } from '../Controllers/posts.js'
+import { getPosts, createPost, updatePost, deletePost, likePost, getPostsBySearch } from '../Controllers/posts.js'
 
 import auth from '../middleware/auth.js';
 
@@ -11,5 +11,7 @@ router.post('/', auth, createPost);
 router.patch('/:id', auth, updatePost);
 router.delete('/:id', auth, deletePost);
 router.patch('/:id/likePost', auth, likePost);
+
+router.get('/search', getPostsBySearch);
 
 export default router;

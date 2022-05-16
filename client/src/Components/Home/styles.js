@@ -4,6 +4,9 @@ export const style = {
     marginBottom: '1rem',
     display: 'flex',
     padding: '16px',
+    '& .MuiTextField-root': {
+      margin: "10px 0px",
+    },
   },
   pagination: {
     borderRadius: 1,
@@ -13,7 +16,7 @@ export const style = {
   gridContainer: {
     flexDirection: {
       xs: "column-reverse",
-      md: "row"
+      sm: "row"
     }
   },
   chip: {

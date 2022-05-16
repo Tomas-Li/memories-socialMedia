@@ -16,6 +16,17 @@ export const getPosts = () => async (dispatch) => {
   }
 }
 
+export const getPostBySearch = (searchQuery) => async (dispatch) => {
+  try {
+    //data will be an array of objects (objects -> posts)
+    const { data } = await api.fetchPostBySearch(searchQuery);
+
+    dispatch({ type: CONST.fetchBySearch, payload: data });
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 //as we are creating a post this method has to receive it.
 export const createPost = (post) => async (dispatch) => {
   try {

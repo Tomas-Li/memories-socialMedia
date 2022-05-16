@@ -9,14 +9,15 @@ export const style = {
     margin: "30px 0",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
     "img": {
       width: 50
     }
   },
   heading: {
-    color: deepPurple[500]
+    color: deepPurple[500],
+    marginLeft:  "20px"
   },
   image: {
     marginLeft: 15,

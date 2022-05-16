@@ -16,6 +16,8 @@ API.interceptors.request.use((req) => {
 
 // posts
 export const fetchPost = () => API.get('/post');
+export const fetchPostBySearch = (searchQuery) => 
+  API.get(`/post/search?searchTerm=${searchQuery.searchTerm || ''}&searchTags=${searchQuery.searchTags || ''}`)
 //This call will create a post, so it has to receive it, then call the backend with it.
 export const createPost = (newPost) => API.post('/post', newPost);
 export const updatePost = (id, updatedPost) => API.patch(`/post/${id}`, updatedPost)
@@ -25,7 +27,7 @@ export const likePost = (id) => API.patch(`/post/${id}/likePost`);
 
 // tags
 export const fetchTags = () => API.get('/tags');
-export const createTags = (newPost) => API.post('/tags', newPost);
+export const createTags = (newTags) => API.post('/tags', newTags);
 
 
 // auth

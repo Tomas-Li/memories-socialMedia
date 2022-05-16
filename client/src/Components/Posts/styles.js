@@ -5,7 +5,7 @@ const theme = createTheme({});
 export const style = {
   mainContainer: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'stretch',
   },
   smMargin: {
     margin: theme.spacing(1),

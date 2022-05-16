@@ -5,30 +5,31 @@ import FileBase from 'react-file-base64';
 
 //Actions
 import { createPost, updatePost } from '../../actions/posts';
-import { createTags, fetchTags } from '../../api';
+import { createTags } from '../../actions/tags';
 
 //UI
-import { TextField, Button, Typography, Paper, Box } from '@mui/material';
+import { Autocomplete, Box, Button, Chip, Paper, Stack, TextField, Typography } from '@mui/material';
 
 //Styles
 import { style } from './styles';
 
 
 const Form = ({ currentId, setCurrentId }) => {
+  // Hooks
   const dispatch = useDispatch();
+
+  // Store-state
   const user = useSelector((state) => state.auth.authData);
+  const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
   const tags = useSelector((state) => state.tags);
 
-  console.log(tags)
-
+  // State
   const [postData, setPostData] = useState({
     title: '',
     message: '',
-    tags: '',
+    tags: [],
     selectedFile: ''
   });
-  
-  const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
 
   useEffect(() => {
     if(post) setPostData(post);
@@ -40,8 +41,11 @@ const Form = ({ currentId, setCurrentId }) => {
 
     if(currentId) {
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
+      dispatch(createTags({ tags: postData.tags }));
+      //todo{verificacion de tags cuando se hace update tambien}
     } else {
       dispatch(createPost({ ...postData, name: user?.result?.name })); 
+      dispatch(createTags({ tags: postData.tags }))
     }
     clear();
   };
@@ -51,17 +55,12 @@ const Form = ({ currentId, setCurrentId }) => {
     setPostData({
       title: '',
       message: '',
-      tags: '',
+      tags: [],
       selectedFile: ''
     });
   }
 
-  const tagsFixer = (tags) => {
-    const tagsArray = tags.split(',').map(tag => `${tag.trim().toLowerCase()}`);
-    return tagsArray
-  }
-
-
+  //Aca empieza el componente
   if(!user?.result.name) {
     return(
       <Paper sx={style.paper}>
@@ -93,14 +92,40 @@ const Form = ({ currentId, setCurrentId }) => {
               value={postData.message}
               onChange={(e) => setPostData({ ...postData, message: e.target.value })}
             />
-            <TextField
-              name="tags"
-              variant='outlined'
-              label="Tags (coma separated, no spaces)"
-              fullWidth
+            {/* 
+              The following Component is the autocomplete which allows new entries
+                -We are using an isolated new state as we can't add to the store state until is a confirmed changed inside the DB.
+                -Onchange will give us an event and a new value (which is all the chips in our textfield)
+             */}
+            <Stack spacing={3}>
+              <Autocomplete
               value={postData.tags}
-              onChange={(e) => setPostData({ ...postData, tags: tagsFixer(e.target.value) })}
-            />
+              onChange={(event, newValue) => {
+                setPostData({ ...postData, tags: newValue})
+              }}
+              multiple
+              limitTags={5}
+              id="tags-filled"
+              options={tags.map((option) => option.name)}
+              freeSolo
+              renderTags={(value, getTagProps) => value.map((option, index) => (
+                  <Chip 
+                    variant="outlined"
+                    label={option}
+                    {...getTagProps({ index })}
+                  />
+                ))
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Tags" 
+                  placeholder="Tags"
+                />
+              )}
+              />
+            </Stack>
           </Box>
           <Box sx={style.fileInput}>
             <FileBase

@@ -1,9 +1,10 @@
 export const POST = {
   fetchAll: 'FETCH_ALL_POSTS',
+  fetchBySearch: 'FETCH_BY_SEARCH',
   create: 'CREATE_POST',
   update: 'UPDATE_POST',
   delete: 'DELETE_POST',
-  like: 'LIKE_POST'
+  like: 'LIKE_POST',
 }
 
 export const AUTH = {

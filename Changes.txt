@@ -10,4 +10,4 @@ Changes over the original code:
 
 -Aesthetic changes (background, some colors, icon?)
 
--Added a tag collection to the db so that I could exchange chips input to autocomplete
+-Added a tag collection to the db so that I could exchange <ChipInput/> to <Autocomplete /> (and to give an actual feedback when searching through tags)

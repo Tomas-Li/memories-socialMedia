@@ -5,6 +5,8 @@ const reducer = (state = [], action) => {
   switch (action.type) {
     case CONST.fetchAll:
       return action.payload;
+    case CONST.fetchBySearch:
+      return action.payload;
     case CONST.create:
       //the old state + the new post
       return [...state, action.payload];

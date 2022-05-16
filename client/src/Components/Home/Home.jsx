@@ -1,13 +1,14 @@
 //External imports
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 //Actions
-import { getPosts } from '../../actions/posts';
+import { getPosts, getPostBySearch } from '../../actions/posts';
+import { getTags } from '../../actions/tags';
 
 //UI
-import { Container, Grow, Grid, Paper, AppBar, TextField, Chip, Stack, Autocomplete, Button } from '@mui/material'
+import { Container, Grow, Grid, Paper, AppBar, TextField, Stack, Autocomplete, Button } from '@mui/material'
 
 //Internal imports
 import Posts from '../Posts/Posts';
@@ -24,24 +25,40 @@ function useQuery() {
 }
 
 const Home = () => {
-  //todo{describe what is id doing here}
-  const [currentId, setCurrentId] = useState(null)
-  const [search, setSearch] = useState('');
-
-
+  // Hooks
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const query = useQuery();
   const page = query.get('page') || 1; //this looks if we have the url param 'page' if not it returns 1
   const searchQuery = query.get('searchQuery'); //this looks if we have the url param searchQuery
 
+  // Store-State
+  const tags = useSelector((state) => state.tags)
+
+  // States
+  //todo{describe what is id doing here}
+  const [currentId, setCurrentId] = useState(null)
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTags, setSearchTags] = useState([]);
+
+
   useEffect(() => {
     dispatch(getPosts());
+    dispatch(getTags());
   }, [currentId, dispatch]);
 
-  //function that search through the posts (based on the tags)
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter'){
-      //todo{search post code}
+  const searchPost = () => {
+    //todo{ver si necesito aplicar trim a los tags o al searchTerm}
+    if(searchTerm || searchTags.length !== 0){
+      //searchTerm is an string
+      //searchTags is an array of Objects(_id, name) -> We have to convert them to pass them as params to the backend
+      const aux = searchTags.map((tagObject) => tagObject['name']).join(',')
+      dispatch(getPostBySearch({ searchTerm, searchTags: aux }));
+      setSearchTerm('');
+      setSearchTags([]);
+      navigate(`/posts/search?searchTerm=${searchTerm || ''}&searchTags=${aux || ''}`);
+    } else {
+      navigate('/');
     }
   }
 
@@ -63,27 +80,32 @@ const Home = () => {
                   variant='outlined'
                   label="Search Memories"
                   fullWidth
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  onKeyDown={handleKeyPress}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={(e) => {if(e.key === 'Enter'){searchPost()}}}
                 />
-                {/* <Stack spacing={3}>
+                <Stack spacing={3}>
                   <Autocomplete 
-                    multiple={}
+                    value={searchTags}
+                    onChange={(e, newValue) => {
+                      setSearchTags(newValue);
+                    }}
+                    multiple
+                    id="search-tags"
+                    limitTags={3}
+                    options={tags}
+                    getOptionLabel={(option) => option.name}
+                    renderInput={(params) => (
+                      <TextField 
+                        {...params}
+                        variant="outlined"
+                        label="Search Tags"
+                        placeholder="Search Tags"
+                      />
+                    )}
                   />
-                </Stack> */}
-
-
-                {/* <Chip 
-                  sx={style.chip}
-                  value={tags}
-                  onAdd={handleAdd}
-                  onDelete={handleDelete}
-                  label="Search Tags"
-                  variant="outlined"
-                /> */}
-
-                <Button color="primary" onClick={() => {}}>Search</Button>
+                </Stack>
+                <Button variant='contained' color="secondary" onClick={searchPost}>Search</Button>
               </AppBar>
               <Form currentId={currentId} setCurrentId={setCurrentId}/>
               <Paper sx={style.pagination} elevation={6}>
