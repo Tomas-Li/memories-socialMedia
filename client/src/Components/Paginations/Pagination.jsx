@@ -1,21 +1,38 @@
 //External imports
-import React from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+//Actions
+import { getPosts } from '../../actions/posts';
+
+//UI
 import { Pagination, PaginationItem } from '@mui/material'
 
 //styles
 import { style } from './style';
 
-const Paginate = () => {
+const Paginate = ({ page }) => {
+  //hooks:
+  const dispatch = useDispatch();
+
+  const { numberOfPages } = useSelector((state) => state.posts);
+
+  useEffect(() => {
+    if(page) dispatch(getPosts(page));
+  }, [page])
+
   return (
     <Pagination
-      sx={style.ul}
-      count={5}
-      page={1}
+      sx={{ul: style.ul}}
+      count={numberOfPages}
+      page={Number(page) || 1}
+      showFirstButton
+      showLastButton
       variant="outlined"
       color="primary"
       renderItem={(item) => (
-        <PaginationItem {...item} component={Link} to={`/posts?page=${1}`} />
+        <PaginationItem {...item} component={Link} to={`/posts?page=${item.page}`} />
       )}
     />
   )

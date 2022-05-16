@@ -71,9 +71,9 @@ const Form = ({ currentId, setCurrentId }) => {
     )
   } else {
   return (
-      <Paper sx={style.paper}>
+      <Paper sx={style.paper} elevation={6}>
         <form autoComplete='off' noValidate style={style.form} onSubmit={handleSubmit}>
-          <Typography variant="h6">{currentId ? 'Updating' : 'Creating'} a Memory!</Typography>
+          <Typography variant="h6">{currentId ? 'Updating' : 'Creating'} a Memory:</Typography>
           <Box sx={style.root}>
             <TextField
               name="title"

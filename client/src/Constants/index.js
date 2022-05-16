@@ -5,6 +5,8 @@ export const POST = {
   update: 'UPDATE_POST',
   delete: 'DELETE_POST',
   like: 'LIKE_POST',
+  startLoading: 'START_LOADING',
+  endLoading: 'END_LOADING',
 }
 
 export const AUTH = {

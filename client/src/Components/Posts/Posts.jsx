@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 //UI
-import { Grid, CircularProgress } from '@mui/material'
+import { Grid, CircularProgress, Typography } from '@mui/material'
 
 //Internal imports
 import Post from './Post/Post'
@@ -12,10 +12,14 @@ import Post from './Post/Post'
 import { style } from './styles'
 
 const Posts = ({ setCurrentId }) => {
-  const posts = useSelector((state) => state.posts);
+  const { posts, isLoading } = useSelector((state) => state.posts);
+
+  if(!posts.length && !isLoading) return (
+    <Typography variant="h3" sx={{color:"white"}}>Nothing to show</Typography>
+  )
 
   return (
-    !posts.length ? <CircularProgress /> :(
+    isLoading ? <CircularProgress /> :(
       <Grid sx={style.mainContainer} container spacing={3}>
         {posts.map(post => (
           <Grid item key={post._id} xs={12} sm={12} md={6} lg={4}>

@@ -15,7 +15,7 @@ API.interceptors.request.use((req) => {
 });
 
 // posts
-export const fetchPost = () => API.get('/post');
+export const fetchPost = (page) => API.get(`/post?page=${page}`);
 export const fetchPostBySearch = (searchQuery) => 
   API.get(`/post/search?searchTerm=${searchQuery.searchTerm || ''}&searchTags=${searchQuery.searchTags || ''}`)
 //This call will create a post, so it has to receive it, then call the backend with it.

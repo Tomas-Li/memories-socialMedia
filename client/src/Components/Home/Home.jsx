@@ -19,7 +19,7 @@ import Pagination from '../Paginations/Pagination';
 import { style } from './styles'
 
 
-//This is for searching through tags
+//This will be used for searching through the paramas in the url
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -30,7 +30,7 @@ const Home = () => {
   const navigate = useNavigate();
   const query = useQuery();
   const page = query.get('page') || 1; //this looks if we have the url param 'page' if not it returns 1
-  const searchQuery = query.get('searchQuery'); //this looks if we have the url param searchQuery
+  const searchQuery = query.get('searchTerm'); //this looks if we have the url param searchQuery
 
   // Store-State
   const tags = useSelector((state) => state.tags)
@@ -41,9 +41,9 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchTags, setSearchTags] = useState([]);
 
-
+  //todo{posts was moved outside from here, so this code should be deleted}
   useEffect(() => {
-    dispatch(getPosts());
+    // dispatch(getPosts());
     dispatch(getTags());
   }, [currentId, dispatch]);
 
@@ -109,7 +109,7 @@ const Home = () => {
               </AppBar>
               <Form currentId={currentId} setCurrentId={setCurrentId}/>
               <Paper sx={style.pagination} elevation={6}>
-                <Pagination />
+                <Pagination page={page} />
               </Paper>
             </Grid>
           </Grid>

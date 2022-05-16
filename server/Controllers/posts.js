@@ -3,10 +3,18 @@ import PostMessage from '../models/postMessage.js'
 
 
 export const getPosts = async (req, res) => {
-  try {
-    const postMesages = await PostMessage.find();
+  const { page } = req.query;
 
-    res.status(200).json(postMesages);
+  try {
+    //Const for the number of post per page
+    const LIMIT = 6;
+    const startIndex = (Number(page) - 1) * LIMIT; //Remember that is base 0, that's why there is a -1
+    const total = await PostMessage.countDocuments({}); //We need this to know how many pages we have in our pagination
+
+    //We recover all the post, sort them to start by the newest post, and then we limit the number and start looking from our startIndex
+    const posts = await PostMessage.find().sort({ _id: -1}).limit(LIMIT).skip(startIndex);
+
+    res.status(200).json({ posts: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) });
   } catch (error) {
     res.status(404).json({ message: error.message })
   }
