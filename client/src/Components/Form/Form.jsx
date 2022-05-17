@@ -1,6 +1,7 @@
 //External imports
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import FileBase from 'react-file-base64';
 
 //Actions
@@ -17,10 +18,11 @@ import { style } from './styles';
 const Form = ({ currentId, setCurrentId }) => {
   // Hooks
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Store-state
   const user = useSelector((state) => state.auth.authData);
-  const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
+  const post = useSelector((state) => currentId ? state.posts.posts.find((p) => p._id === currentId) : null);
   const tags = useSelector((state) => state.tags);
 
   // State
@@ -42,9 +44,9 @@ const Form = ({ currentId, setCurrentId }) => {
     if(currentId) {
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
       dispatch(createTags({ tags: postData.tags }));
-      //todo{verificacion de tags cuando se hace update tambien}
+      navigate(`/posts/${currentId}`)
     } else {
-      dispatch(createPost({ ...postData, name: user?.result?.name })); 
+      dispatch(createPost({ ...postData, name: user?.result?.name }, navigate)); 
       dispatch(createTags({ tags: postData.tags }))
     }
     clear();

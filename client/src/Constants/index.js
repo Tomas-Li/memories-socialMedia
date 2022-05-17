@@ -1,4 +1,5 @@
 export const POST = {
+  fetchPost: 'FETCH_POST',
   fetchAll: 'FETCH_ALL_POSTS',
   fetchBySearch: 'FETCH_BY_SEARCH',
   create: 'CREATE_POST',

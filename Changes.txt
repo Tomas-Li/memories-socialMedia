@@ -11,3 +11,5 @@ Changes over the original code:
 -Aesthetic changes (background, some colors, icon?)
 
 -Added a tag collection to the db so that I could exchange <ChipInput/> to <Autocomplete /> (and to give an actual feedback when searching through tags)
+
+-ButtonBase wroke my post element, so I changed to a Link element from react-router-dom and instead of using a function to redirect myself, I use a dynamic string inside this element. BTW I enclosed the element inside a Box container to apply styles to all the childs.

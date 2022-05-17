@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 //Actions
-import { getPosts, getPostBySearch } from '../../actions/posts';
+import { getPostBySearch } from '../../actions/posts';
 import { getTags } from '../../actions/tags';
 
 //UI
@@ -30,7 +30,8 @@ const Home = () => {
   const navigate = useNavigate();
   const query = useQuery();
   const page = query.get('page') || 1; //this looks if we have the url param 'page' if not it returns 1
-  const searchQuery = query.get('searchTerm'); //this looks if we have the url param searchQuery
+  const searchQueryTerm = query.get('searchTerm'); //this looks if we have the url param searchQuery
+  const searchQueryTags = query.get('searchTags');
 
   // Store-State
   const tags = useSelector((state) => state.tags)
@@ -108,9 +109,11 @@ const Home = () => {
                 <Button variant='contained' color="secondary" onClick={searchPost}>Search</Button>
               </AppBar>
               <Form currentId={currentId} setCurrentId={setCurrentId}/>
-              <Paper sx={style.pagination} elevation={6}>
-                <Pagination page={page} />
-              </Paper>
+              {!(searchQueryTags || searchQueryTerm) &&(
+                <Paper sx={style.pagination} elevation={6}>
+                  <Pagination page={page} />
+                </Paper>
+              )}
             </Grid>
           </Grid>
         </Container>

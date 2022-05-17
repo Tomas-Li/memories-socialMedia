@@ -47,4 +47,9 @@ export const style = {
     display: 'flex',
     justifyContent: 'space-between',
   },
+  box: {
+    'a':{
+      textDecoration: "none"
+    }
+  }
 };

@@ -1,5 +1,6 @@
 //External imports
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom'
 import moment from 'moment';
 
 //Actions
@@ -9,7 +10,7 @@ import { deletePost, likePost } from '../../../actions/posts';
 import Likes from './Likes';
 
 //UI
-import { Box, Card, CardActions, CardContent, CardMedia, Button, Typography } from '@mui/material';
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
@@ -17,24 +18,31 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { style } from './styles'
 
 const Post = ({ post, setCurrentId }) => {
+  //Hooks
   const dispatch = useDispatch();
+  
+  //State
   const user = useSelector((state) => state.auth.authData)
 
   return (
     <Card sx={style.card} raised elevation={6}>
-      <CardMedia sx={style.media} image={post.selectedFile} title={post.title}/>
-      <Box sx={style.overlay}>
-        <Typography variant="h6">{post.name}</Typography>
-        <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
-      </Box>
-      {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-        <Box sx={style.overlay2}>
-          <Button sx={{color: 'white'}} size="small" onClick={() => setCurrentId(post._id)}>
-            <MoreHorizIcon fontSize='default' />
-          </Button>
+      <Box sx={style.box}>
+        <CardMedia sx={style.media} image={post.selectedFile} title={post.title}/>
+        <Box sx={style.overlay}>
+          <Typography variant="h6">{post.name}</Typography>
+          <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
         </Box>
-      )}
-      <Typography sx={style.title} variant="h6" gutterBottom>{post.title}</Typography>
+        {(user?.result?.sub === post?.creator || user?.result?._id === post?.creator) && (
+          <Box sx={style.overlay2}>
+            <Button sx={{color: 'white'}} size="small" onClick={() => setCurrentId(post._id)}>
+              <MoreHorizIcon fontSize='default' />
+            </Button>
+          </Box>
+        )}
+        <Link to={`/posts/${post._id}`}>
+          <Typography sx={style.title} variant="h6" gutterBottom>{post.title}</Typography>
+        </Link>
+      </Box>
       <CardContent>
         <Typography variant="body2" component="p" gutterBottom>{post.message}</Typography>
       </CardContent>

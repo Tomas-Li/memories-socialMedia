@@ -27,8 +27,6 @@ const Paginate = ({ page }) => {
       sx={{ul: style.ul}}
       count={numberOfPages}
       page={Number(page) || 1}
-      showFirstButton
-      showLastButton
       variant="outlined"
       color="primary"
       renderItem={(item) => (

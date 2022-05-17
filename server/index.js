@@ -27,7 +27,7 @@ app.use('/tags', tagsRoutes);
 app.use('/user', userRoutes);
 
 app.get('/', (req, res) => {
-  res.send("Hello there! this is the back-end for 'Memories API', go and check the front-end, no reason to stick here")
+  res.send("Hello there! this is the back-end for 'Memories API', go and check the front-end, no reason to stick around here")
 })
 
 //DB connection (ATLAS connection)

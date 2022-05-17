@@ -3,6 +3,9 @@ import { POST as CONST } from '../Constants'
 //Here the state will be the posts keeped inside the DB, but I'm not renaming the state var to posts as done in the video for keeping the nomencalture
 const reducer = (state = { isLoading: true, posts: [] }, action) => {
   switch (action.type) {
+    case CONST.fetchPost:
+      return { ...state, post: action.payload };
+
     case CONST.fetchAll:
       return {
         ...state,
