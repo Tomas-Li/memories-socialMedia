@@ -1,6 +1,4 @@
-import { createTheme } from "@mui/material"
-
-const theme = createTheme({})
+import { theme } from '../../mainTheme';
 
 export const style = {
   root: {

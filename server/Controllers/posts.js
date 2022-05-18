@@ -27,7 +27,7 @@ export const getPosts = async (req, res) => {
     //We recover all the post, sort them to start by the newest post, and then we limit the number and start looking from our startIndex
     const posts = await PostMessage.find().sort({ _id: -1}).limit(LIMIT).skip(startIndex);
 
-    res.status(200).json({ posts: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) });
+    res.status(200).json({ posts: posts, numberOfPages: Math.ceil(total / LIMIT) });
   } catch (error) {
     res.status(404).json({ message: error.message })
   }

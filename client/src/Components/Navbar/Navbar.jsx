@@ -40,7 +40,7 @@ const Navbar = () => {
   return (
   <AppBar sx={style.appBar} position='static' color='inherit'>
     <Box sx={style.brandContainer}>
-      <Typography sx={style.heading} variant='h2' component={Link} to="/" align='center'>Memories</Typography>
+      <Typography sx={style.heading} color="secondary" variant='h2' component={Link} to="/" align='center'>Memories</Typography>
       <img style={style.image} src={memories} alt="memories"/>
     </Box>
     <Toolbar sx={style.toolbar}>
@@ -51,7 +51,7 @@ const Navbar = () => {
           <Button sx={style.purple} variant="contained" color="secondary" onClick={logout}>Logout</Button>
         </Box>
       ) : (
-        <Button sx={style.purple} component={Link} to="/auth" variant="cantained" color="primary">Sign In</Button>
+        <Button component={Link} to="/auth" variant="contained" color="secondary">Sign In</Button>
       )}
     </Toolbar>
   </AppBar>

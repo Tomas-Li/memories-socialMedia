@@ -1,6 +1,4 @@
-import { createTheme } from "@mui/material";
-
-const theme = createTheme({});
+import { theme } from '../../mainTheme';
 
 export const style = {
   media: {
@@ -8,6 +6,7 @@ export const style = {
     objectFit: 'cover',
     width: '100%',
     maxHeight: '600px',
+    maxWidth: '1000px'
   },
   card: {
     display: 'flex',
@@ -15,7 +14,6 @@ export const style = {
     [theme.breakpoints.down('sm')]: {
       flexWrap: 'wrap',
       flexDirection: 'column',
-      backgroundColor: 'red'
     },
   },
   section: {

@@ -27,7 +27,13 @@ const Post = ({ post, setCurrentId }) => {
   return (
     <Card sx={style.card} raised elevation={6}>
       <Box sx={style.box}>
-        <CardMedia sx={style.media} image={post.selectedFile} title={post.title}/>
+        <Link to={`/posts/${post._id}`}>
+        <CardMedia 
+          sx={style.media}
+          image={post.selectedFile ? post.selectedFile : 'a'}
+          title={post.title}
+        />
+        </Link>
         <Box sx={style.overlay}>
           <Typography variant="h6">{post.name}</Typography>
           <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
@@ -39,9 +45,7 @@ const Post = ({ post, setCurrentId }) => {
             </Button>
           </Box>
         )}
-        <Link to={`/posts/${post._id}`}>
-          <Typography sx={style.title} variant="h6" gutterBottom>{post.title}</Typography>
-        </Link>
+        <Typography sx={style.title} variant="h6" gutterBottom>{post.title}</Typography>
       </Box>
       <CardContent>
         <Typography variant="body2" component="p" gutterBottom>{post.message}</Typography>

@@ -37,6 +37,15 @@ const Form = ({ currentId, setCurrentId }) => {
     if(post) setPostData(post);
   }, [post])
 
+  const clear = () => {
+    setCurrentId(null);
+    setPostData({
+      title: '',
+      message: '',
+      tags: [],
+      selectedFile: ''
+    });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,16 +60,6 @@ const Form = ({ currentId, setCurrentId }) => {
     }
     clear();
   };
-
-  const clear = () => {
-    setCurrentId(null);
-    setPostData({
-      title: '',
-      message: '',
-      tags: [],
-      selectedFile: ''
-    });
-  }
 
   //Aca empieza el componente
   if(!user?.result.name) {

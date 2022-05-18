@@ -42,9 +42,8 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchTags, setSearchTags] = useState([]);
 
-  //todo{posts was moved outside from here, so this code should be deleted}
+  //I'm updating the tags after every dispatch or when someone is going to update a post
   useEffect(() => {
-    // dispatch(getPosts());
     dispatch(getTags());
   }, [currentId, dispatch]);
 

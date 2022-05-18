@@ -27,6 +27,7 @@ const initialState = {
 
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch();
@@ -48,9 +49,12 @@ const Auth = () => {
 
   const handleShowPassword = () => setShowPassword(() => !showPassword);
 
+  const handleShowConfirmPassword = () => setShowConfirmPassword(() => !showConfirmPassword);
+
   const switchMode = () => {
     setIsSignUp(() => !isSignUp);
     setShowPassword(false);
+    setShowConfirmPassword(false);
   }
 
 
@@ -80,7 +84,13 @@ const Auth = () => {
             handleShowPassword={handleShowPassword}
             />
             { isSignUp && (
-              <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password"/>
+              <Input
+               name="confirmPassword" 
+               label="Repeat Password" 
+               handleChange={handleChange} 
+               type={showConfirmPassword ? "text" : "password"}
+               handleShowPassword={handleShowConfirmPassword}
+              />
             )}
             <Button type="submit" fullWidth variant="contained" color="primary" sx={style.submit}>
               { isSignUp ? 'Sign Up' : 'Sign In'}

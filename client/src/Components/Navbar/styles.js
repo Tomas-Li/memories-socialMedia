@@ -1,7 +1,5 @@
-import { createTheme } from "@mui/material";
+import { theme } from '../../mainTheme';
 import { deepPurple } from '@mui/material/colors'
-
-const theme = createTheme({});
 
 export const style = {
   appBar: {
@@ -16,8 +14,9 @@ export const style = {
     }
   },
   heading: {
-    color: deepPurple[500],
-    marginLeft:  "20px"
+    marginLeft:  "20px",
+    textDecoration: 'none',
+    fontWeight: '500'
   },
   image: {
     marginLeft: 15,
